@@ -9,6 +9,7 @@ class Historico:
         self.aboTerminal = None
         self.aboCodBanco = None
         self.aboNroCuenta = None
+        self.aboNroCuentaBanco = None
         self.aboTipoCuenta = None
         self.comerDesc = None
         self.comerTipoPer = 0
@@ -83,6 +84,7 @@ class Historico:
             historico.hisFechaEjecucion = row['hisFechaEjecucion']
             historico.aboCodBanco = row['aboCodBanco']
             historico.aboNroCuenta = row['comerCuentaBanco']
+            historico.aboNroCuentaBanco = row['aboNroCuenta']
             historico.aboTipoCuenta = row['aboTipoCuenta']
             historico.comerDesc = row['comerDesc']
             historico.comerTipoPer = row['comerTipoPer']

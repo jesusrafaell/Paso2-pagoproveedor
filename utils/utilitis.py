@@ -1,6 +1,8 @@
 import datetime
+from typing import List, Tuple, Union
+from classes.Historico import Historico
 
-class Utilidades:
+class Util:
         
     @staticmethod
     def convierteFechaSql(fecha):
@@ -48,3 +50,53 @@ class Utilidades:
     def deStringToDate(fecha):
         fechaEnviar = datetime.datetime.strptime(fecha, '%d-%m-%Y')
         return fechaEnviar.date()
+    
+    def get_dataBanco(historicos: List[Historico]) -> Tuple[str, str]:
+        comerRif = ""
+        nro_cuenta = ""
+
+        for h in historicos:
+            if not comerRif:
+                comerRif = h.comerRifBanco
+            elif h.comerRifBanco != comerRif:
+                print('Más de un comerRif encontrado')
+                raise ValueError('Más de un comerRif encontrado')
+            
+            if not nro_cuenta:
+                nro_cuenta = h.aboNroCuentaBanco
+            elif h.aboNroCuentaBanco != nro_cuenta:
+                print('Más de un comerRif encontrado')
+                raise ValueError('Más de un número de cuenta encontrado')
+
+        if not comerRif or not nro_cuenta:
+            print('Más de un comerRif encontrado')
+            raise ValueError('No se encontró ningún historial')
+        
+        return comerRif, nro_cuenta
+
+    def get_rif_prefix(rif_prefix) -> str: 
+        tipoDoc = "01"
+        if rif_prefix == "V":
+            tipoDoc = "01"
+        elif rif_prefix in ["P", "J"]:
+            tipoDoc = "02"
+        elif rif_prefix == "E":
+            tipoDoc = "08"
+        return tipoDoc
+
+    def getTipoCuentaAbono(value: str) -> str: 
+        if value == "0104":
+            return "1"
+        else:
+            return "3"
+
+    def convierteFechaSql(fecha: str) -> Union[None, datetime.date]:
+        print(fecha)
+        try:
+            fechaUtil = datetime.strptime(fecha, '%d-%m-%Y')
+        except ValueError:
+            return None
+
+        fechaSql = fechaUtil.date()
+
+        return fechaSql
