@@ -1,8 +1,8 @@
 #Lote version python v1
-import decimal
 import time
 from classes.Historico import Historico
 from utils.db import Database
+from utils.excel import Excel
 from variables import *
 from utils.writeFile import File 
 from datetime import datetime
@@ -26,42 +26,45 @@ if (cnxn):
   if (control == 0):
     result = Historico.getHistoricoPagoList(strDate, cnxn) # Get Historico
 
-    print("Cantidad Resgistros ",  len(result))
-
-    day = datetime.now().day
-    month = datetime.now().month
-
-    dayS = str(day).zfill(2)
-    monthS = str(month).zfill(2)
-
-    valueafiliado = reportBeginFile
-    lotefile =  str(valueafiliado) + monthS + dayS
-    numeroLote = int(db.getNumeroLote("D0U", lotefile, cnxn)) + 1
-
-    print("lote---> ",  numeroLote)
-
-    nombre_archivo = lotefile + str(numeroLote).zfill(2)
-
-    fecha = datetime.now().strftime("%Y%m%d")
-
-    #Ficheros
-    nombre_archivo_bangente = fecha + "PAGO"
-    ruta_archivo = rutaArchivo
-    fichero = os.path.join(ruta_archivo, nombre_archivo_bangente + ".txt")
-    archivo_xls = os.path.join(ruta_archivo, nombre_archivo + ".xls")
-    log = os.path.join(rutaArchivo, "logApp.txt")
-
-    print("Nombre archivo", nombre_archivo_bangente)
-
-    if os.path.exists(fichero):
-      os.remove(fichero)
-    if os.path.exists(archivo_xls):
-      os.remove(archivo_xls)
-    if not os.path.exists(log):
-      open(log, "w").close()
-
     if(len(result)):
+      Excel.make_report_excel(result, nroAfiliado)
+
+      print("Cantidad Resgistros ",  len(result))
+
+      day = datetime.now().day
+      month = datetime.now().month
+
+      dayS = str(day).zfill(2)
+      monthS = str(month).zfill(2)
+
+      valueafiliado = reportBeginFile
+      lotefile =  str(valueafiliado) + monthS + dayS
+      numeroLote = int(db.getNumeroLote("D0U", lotefile, cnxn)) + 1
+
+      print("lote---> ",  numeroLote)
+
+      nombre_archivo = lotefile + str(numeroLote).zfill(2)
+
+      fecha = datetime.now().strftime("%Y%m%d")
+
+      #Ficheros
+      nombre_archivo_bangente = fecha + "PAGO"
+      fichero = os.path.join(rutaArchivo, nombre_archivo_bangente + ".txt")
+      # archivo_xls = os.path.join(ruta_archivo, nombre_archivo + ".xls")
+      log = os.path.join(rutaArchivo, "logApp.txt")
+
+      print("Nombre archivo", nombre_archivo_bangente)
+
+      if os.path.exists(fichero):
+        os.remove(fichero)
+      # if os.path.exists(archivo_xls):
+      #   os.remove(archivo_xls)
+      if not os.path.exists(log):
+        open(log, "w").close()
+
       line0 = line1 = ""
-      File.writeFile(result, ahora, fichero, numeroLote, nombre_archivo, cnxn)
+      # File.writeFile(result, ahora, fichero, numeroLote, nombre_archivo, cnxn)
+    else:
+      print("No hay registros")
 else:
   print("error contect")
