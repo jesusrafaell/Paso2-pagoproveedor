@@ -51,7 +51,7 @@ def write_excel(data: List[Historico], header, filename, title, sheetname, afili
             # print(row)
             sheet.append(row)
 
-        print('Nombre archivo excel:', filename)
+        # print('Nombre archivo excel:', filename)
         wb.save(filename)
 
     except Exception as e:

@@ -75,10 +75,10 @@ class Database:
         with cnxn.cursor() as cursor:
             cursor.execute(stmt, params)
             # cnxn.commit()
-            if cursor.rowcount > 0:
-                print("Inserción realizada con éxito, tipoRegistro:", lote.lotTipoRegistro, "lote:", lote.lotNumLote)
-            else:
-                print("La inserción ha fallado, tipoRegistro:", lote.lotTipoRegistro, "lote:", lote.lotNumLote)
+            # if cursor.rowcount > 0:
+            #     print("Inserción realizada con éxito, tipoRegistro:", lote.lotTipoRegistro, "lote:", lote.lotNumLote)
+            # else:
+            #     print("La inserción ha fallado, tipoRegistro:", lote.lotTipoRegistro, "lote:", lote.lotNumLote)
 
         # print("lote save", cursor)
 
@@ -107,9 +107,9 @@ class Database:
         with cnxn.cursor() as cursor:
             cursor.execute(stmt, params)
             # cnxn.commit()
-            if cursor.rowcount > 0:
-                print("Inserción realizada con éxito cabezera",  "lote:", lote.lotNumLote)
-            else:
-                print("La inserción ha fallado cabbezera", "lote:", lote.lotNumLote)
+            # if cursor.rowcount > 0:
+            #     print("Inserción realizada con éxito cabezera",  "lote:", lote.lotNumLote)
+            # else:
+            #     print("La inserción ha fallado cabbezera", "lote:", lote.lotNumLote)
 
         # print("lote save", cursor)
