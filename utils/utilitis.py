@@ -100,3 +100,19 @@ class Util:
         fechaSql = fechaUtil.date()
 
         return fechaSql
+
+    def rightPad(string: str, length: int, fill_char: str):
+        if len(string) > length:
+            return string[:length]
+        else:
+            return string + (fill_char * (length - len(string)))
+
+    def leftPad(string: str, longitud: int, caracter: str):
+        # Convierte el número a una cadena de texto y rellena con el carácter especificado
+        cadena_rellena = str(string).rjust(longitud, caracter)
+        
+        # Si la cadena resultante es más larga que la longitud especificada, cártala
+        if len(cadena_rellena) > longitud:
+            cadena_rellena = cadena_rellena[:longitud]
+            
+        return cadena_rellena

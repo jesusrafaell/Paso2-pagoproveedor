@@ -15,7 +15,7 @@ class File:
           formatted_time = ahora.strftime("%H%M%S")
           formatted_date = ahora.strftime('%Y%m%d')
 
-          id_proceso = formatted_date + formatted_time + "000000000003".rjust(12, "0") + "019" + "000"
+          id_proceso = formatted_date + formatted_time + "3233079".rjust(12, "0") + "019" + "000"
           # Get montototal del archivo
           montoTotal = 0
           comerRif, nroCuentaBanco = Util.get_dataBanco(arr)
@@ -25,25 +25,25 @@ class File:
               # nroCuentaBanco = registro.aboNroCuentaBanco;
               montoTotal += registro.hisAmountTotal
           
-          # print(nroCuentaBanco, comerRif)
+          print("header",nroCuentaBanco, comerRif)
 
           # print("Monto Total:", montoTotal)
           line0 = (
               "1"
-              + id_proceso.rjust(32, " ") 
+              + Util.leftPad(str(id_proceso), 32, ' ')
               + "00" 
-              + str(numeroLote).rjust(10, "0") 
+              + Util.leftPad(str(numeroLote), 10, '0')
               + "019" 
               + " ".rjust(10) 
               + " ".rjust(6) 
               + " ".rjust(10) 
-              + nroCuentaBanco.rjust(20, "0") 
-              + comerRif.rjust(20, "0") 
-              + str(montoTotal).replace(",", "").replace(".", ",").rjust(23, "0") 
-              + str(montoTotal).replace(",", "").replace(".", ",").rjust(23, "0") 
-              + str(len(arr)).rjust(6, "0") 
+              + Util.leftPad(str(nroCuentaBanco), 20, '0')
+              + Util.leftPad(str(comerRif), 20, '0')
+              + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+              + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+              + Util.leftPad(str(len(arr)), 6, '0')
               + "00" 
-              + nombre_archivo.rjust(30, "0")
+              + Util.leftPad(str(nombre_archivo), 30, '0')
           ) 
           # print(line0)
           file.write(line0 + "\r")
@@ -65,23 +65,27 @@ class File:
               + str(registro.hisFecha.strftime("%Y-%m-%d"))
             )
 
+
+            # nombre = Util.fill_and_trim_string(str( (registro.contNombres + registro.contApellidos)), 40, ' ') + '2'
+            # print(nombre)
+
             line1 = (
               "01"
-              + id_proceso.rjust(32)
+              + Util.leftPad(str(id_proceso), 32, ' ')
               + "01"
-              + str(cont).rjust(10, "0")
-              + str(numeroLote).rjust(10, "0")
-              + registro.aboNroCuenta.rjust(20, "0")
-              + tipoDoc.rjust(3, "0")
-              + registro.comerRif[1:].strip().ljust(15, "0")
-              + (registro.contNombres + registro.contApellidos).ljust(40, " ")
+              + Util.leftPad(str(cont), 10, '0')
+              + Util.leftPad(str(numeroLote), 10, '0')
+              + Util.leftPad(str(registro.aboNroCuenta), 20, '0')
+              + Util.leftPad(str(tipoDoc), 3, '0')
+              + Util.leftPad(str(registro.comerRif[1:].strip()), 15, '0')
+              + Util.rightPad(str( (registro.contNombres + registro.contApellidos)), 40, ' ')
               + "D"
-              + "0".rjust(6, "0")
-              + str(montoTotal).replace(",", "").replace(".", ",").rjust(23, "0")
+              + Util.leftPad("0", 6,'0')
+              + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
               + " ".rjust(23)
               + " ".rjust(10)
               + "".rjust(30, "0")
-              + conceptoMov.rjust(40)
+              + Util.leftPad(str(conceptoMov), 40,'0')
               + "0"
               + "00"
             )

@@ -82,7 +82,7 @@ class Historico:
             historico.hisAmountComisionBanco = row['hisAmountComisionBanco']
             historico.hisAmountTotal = row['hisAmountTotal']
             historico.hisFechaEjecucion = row['hisFechaEjecucion']
-            historico.aboCodBanco = row['aboCodBanco']
+            historico.aboCodBanco = row['comerCodigoBanco']
             historico.aboNroCuenta = row['comerCuentaBanco']
             historico.aboNroCuentaBanco = row['aboNroCuenta']
             historico.aboTipoCuenta = row['aboTipoCuenta']
@@ -114,7 +114,3 @@ class Historico:
         #     print(h.comerRif)
 
         return historicos
-
-
-
-
