@@ -85,7 +85,7 @@ class File:
               + " ".rjust(23)
               + " ".rjust(10)
               + "".rjust(30, "0")
-              + Util.leftPad(str(conceptoMov), 40,'0')
+              + Util.rightPad(str(conceptoMov), 40,'0')
               + "0"
               + "00"
             )
