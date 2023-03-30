@@ -27,6 +27,7 @@ if (cnxn):
     result = Historico.getHistoricoPagoList(strDate, cnxn) # Get Historico
 
     if(len(result)):
+      #Generate excel from Historico
       Excel.make_report_excel(result, nroAfiliado)
 
       print("Cantidad Resgistros ",  len(result))
@@ -63,7 +64,9 @@ if (cnxn):
         open(log, "w").close()
 
       line0 = line1 = ""
-      # File.writeFile(result, ahora, fichero, numeroLote, nombre_archivo, cnxn)
+
+      #Generate Archivo for banc txt
+      File.writeFile(result, ahora, fichero, numeroLote, nombre_archivo, cnxn)
     else:
       print("No hay registros")
 else:
