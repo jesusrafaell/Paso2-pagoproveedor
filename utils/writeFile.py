@@ -29,7 +29,7 @@ class File:
 
           # print("Monto Total:", montoTotal)
           line0 = (
-              "1"
+              "01"
               + Util.leftPad(str(id_proceso), 32, ' ')
               + "00" 
               + Util.leftPad(str(numeroLote), 10, '0')
@@ -43,7 +43,7 @@ class File:
               + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
               + Util.leftPad(str(len(arr)), 6, '0')
               + "00" 
-              + Util.leftPad(str(nombre_archivo), 30, '0')
+              + Util.leftPad(str(nombre_archivo), 7, '0') #basado en el excel
           ) 
           # print(line0)
           file.write(line0 + "\r")

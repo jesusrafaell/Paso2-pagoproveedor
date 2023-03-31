@@ -71,3 +71,8 @@ if (cnxn):
       print("No hay registros")
 else:
   print("error contect")
+
+
+#Init install with python, pip
+# pip install pyodbc
+# pip install openpyxl 
