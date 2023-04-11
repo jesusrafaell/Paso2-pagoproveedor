@@ -10,17 +10,14 @@ import os
 
 db = Database
 cnxn = db.conectar()
-ahora = datetime.now()
-# montoTotal = decimal.Decimal(0)
-# montoTotal = montoTotal.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_CEILING)
 resultado = []
-strDate = time.strftime("%y%m%d")
+ahora = datetime.now()
+strDate = ahora.strftime("%y%m%d")
 strDate = "230301"  # Test specific date
 control = excelControl = 0
 print(strDate)
 
 i = 0
-# while i < 1:
 if (cnxn):
   print("conected DB")
   if (control == 0):
@@ -46,10 +43,15 @@ if (cnxn):
 
       nombre_archivo = lotefile + str(numeroLote).zfill(2)
 
-      fecha = datetime.now().strftime("%Y%m%d")
+      fecha = datetime.strptime(strDate, "%y%m%d")
+
+      date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
+
+      print('Hoy', ahora)
+      print('Dia que se corrio', date)
 
       #Ficheros
-      nombre_archivo_bangente = fecha + "PAGO"
+      nombre_archivo_bangente = fecha.strftime("%Y%m%d") + "PAGO"
       fichero = os.path.join(rutaArchivo, nombre_archivo_bangente + ".txt")
       # archivo_xls = os.path.join(ruta_archivo, nombre_archivo + ".xls")
       log = os.path.join(rutaArchivo, "logApp.txt")
@@ -58,15 +60,13 @@ if (cnxn):
 
       if os.path.exists(fichero):
         os.remove(fichero)
-      # if os.path.exists(archivo_xls):
-      #   os.remove(archivo_xls)
       if not os.path.exists(log):
         open(log, "w").close()
 
       line0 = line1 = ""
 
       #Generate Archivo for banc txt
-      File.writeFile(result, ahora, fichero, numeroLote, nombre_archivo, cnxn)
+      File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn)
     else:
       print("No hay registros")
 else:

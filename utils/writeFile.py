@@ -8,14 +8,35 @@ from utils.db import Database as db
 from typing import List
 import os
 
+codigoClient = codigoClienteDev #Desarrollo
+
 class File:
+  def getLine0(id_proceso: str,numeroLote: str, nroCuentaBanco: str, comerRif: str, montoTotal: str, nombre_archivo: str, total_registros: str) -> str:
+    return (
+      "01"
+      + Util.leftPad(id_proceso, 32, ' ')
+      + "00" 
+      + Util.leftPad(numeroLote, 10, '0') 
+      + "019" 
+      + " ".rjust(10) 
+      + " ".rjust(6) 
+      + " ".rjust(10) 
+      + Util.leftPad(str(nroCuentaBanco), 20, '0')
+      + Util.leftPad(str(comerRif), 20, '0')
+      + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+      + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+      + Util.leftPad(str(total_registros), 6, '0')
+      + "00" 
+      + Util.leftPad(str(nombre_archivo), 7, '0') #basado en el excel
+    ) 
+
   def writeFile(arr: List[Historico], ahora: datetime, fichero: str, numeroLote: int, nombre_archivo:str, cnxn):
     if not os.path.exists(fichero):
       with open(fichero, "w") as file:
           formatted_time = ahora.strftime("%H%M%S")
           formatted_date = ahora.strftime('%Y%m%d')
 
-          id_proceso = formatted_date + formatted_time + "3233079".rjust(12, "0") + "019" + "000"
+          id_proceso = formatted_date + formatted_time + codigoClient.rjust(12, "0") + "019" + "000"
           # Get montototal del archivo
           montoTotal = 0
           comerRif, nroCuentaBanco = Util.get_dataBanco(arr)
@@ -25,36 +46,20 @@ class File:
               # nroCuentaBanco = registro.aboNroCuentaBanco;
               montoTotal += registro.hisAmountTotal
           
-          print("header",nroCuentaBanco, comerRif)
+          # print("header",nroCuentaBanco, comerRif)
 
           # print("Monto Total:", montoTotal)
-          line0 = (
-              "01"
-              + Util.leftPad(str(id_proceso), 32, ' ')
-              + "00" 
-              + Util.leftPad(str(numeroLote), 10, '0')
-              + "019" 
-              + " ".rjust(10) 
-              + " ".rjust(6) 
-              + " ".rjust(10) 
-              + Util.leftPad(str(nroCuentaBanco), 20, '0')
-              + Util.leftPad(str(comerRif), 20, '0')
-              + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
-              + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
-              + Util.leftPad(str(len(arr)), 6, '0')
-              + "00" 
-              + Util.leftPad(str(nombre_archivo), 7, '0') #basado en el excel
-          ) 
+          line0 = File.getLine0(id_proceso, numeroLote, nroCuentaBanco,comerRif,montoTotal,nombre_archivo,len(arr))
           # print(line0)
           file.write(line0 + "\r")
 
           cont = 1
           for registro in arr:
 
-            loteDetalle5 = LoteDetalle()
+            loteDetalle2 = LoteDetalle()
 
             montoTotal = registro.hisAmountTotal
-            id_proceso = formatted_date + formatted_time + "000000000003".rjust(12, "0") + "019" + "000"
+            id_proceso = formatted_date + formatted_time + codigoClient.rjust(12, "0") + "019" + "000"
             tipoDoc = Util.get_rif_prefix(registro.comerRif[0])
             conceptoMov =  (
               "MILPAGO "
@@ -64,10 +69,6 @@ class File:
               + " "
               + str(registro.hisFecha.strftime("%Y-%m-%d"))
             )
-
-
-            # nombre = Util.fill_and_trim_string(str( (registro.contNombres + registro.contApellidos)), 40, ' ') + '2'
-            # print(nombre)
 
             line1 = (
               "01"
@@ -79,11 +80,11 @@ class File:
               + Util.leftPad(str(tipoDoc), 3, '0')
               + Util.leftPad(str(registro.comerRif[1:].strip()), 15, '0')
               + Util.rightPad(str( (registro.contNombres + registro.contApellidos)), 40, ' ')
-              + "D"
+              + "C" #duda
               + Util.leftPad("0", 6,'0')
               + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
               + " ".rjust(23)
-              + " ".rjust(10)
+              + " ".rjust(10) #duda
               + "".rjust(30, "0")
               + Util.rightPad(str(conceptoMov), 40,'0')
               + "0"
@@ -91,17 +92,9 @@ class File:
             )
 
             cont += 1
-            #save LoteDetalle4
-            # loteDetalle4.lotCodCompania ="D0U"
-            # loteDetalle4.lotNumLote = nombre_archivo
-            # loteDetalle4.lotNumPagoProveedor = registro.hisId
-            # loteDetalle4.lotTipoRegistro = 4
-            # loteDetalle4.lotEmailBeneficiario=registro.contMail
-            # loteDetalle4.lotRifBeneficiario = registro.comerRif
-            # loteDetalle4.lotMontoTotal = registro.hisAmountTotal
 
             #Linea 1 save
-            loteDetalle4 = LoteDetalle.init__line1(
+            loteDetalle1 = LoteDetalle.init__line1(
               "D0U", 
               nombre_archivo, 
               registro.hisId,
@@ -111,7 +104,7 @@ class File:
               registro.hisAmountTotal
             )
 
-            db.saveLoteDetalle(loteDetalle4, cnxn)
+            db.saveLoteDetalle(loteDetalle1, cnxn)
 
             tipoCuentaAbono = Util.getTipoCuentaAbono(registro.aboCodBanco)
 
@@ -122,7 +115,7 @@ class File:
                     + str(registro.hisFecha.strftime("%Y-%m-%d"))+ "");
 
             #Linea 2 save
-            loteDetalle5 = LoteDetalle.init__line2(
+            loteDetalle2 = LoteDetalle.init__line2(
               "D0U", 
               nombre_archivo, 
               registro.hisId,
@@ -140,7 +133,7 @@ class File:
               00,
               cuentaDebito
             )
-            db.saveLoteDetalle(loteDetalle5, cnxn)
+            db.saveLoteDetalle(loteDetalle2, cnxn)
             
             file.write(line1 + "\r")
           #end for

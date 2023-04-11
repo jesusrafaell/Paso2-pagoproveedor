@@ -62,8 +62,6 @@ class Historico:
                 result_dict[column_names[i]] = result[i]
             results.append(result_dict)
         
-        # print(column_names) #Colummns name
-
         # Imprimir la lista de resultados en formato clave: valor
         historicos = []
         for row in results:
@@ -104,13 +102,5 @@ class Historico:
             historico.hisFechaProceso = row['hisFechaProceso']
 
             historicos.append(historico)
-
-
-        # for h in historicos: #Imprimir todo
-        #     print(h.__str__())
-
-
-        # for h in historicos: 
-        #     print(h.comerRif)
 
         return historicos
