@@ -12,6 +12,7 @@ codigoClient = codigoClienteDev #Desarrollo
 
 class File:
   def getLine0(id_proceso: str,numeroLote: str, nroCuentaBanco: str, comerRif: str, montoTotal: str, nombre_archivo: str, total_registros: str) -> str:
+    print(comerRif, comerRif[1:].strip() )
     return (
       "01"
       + Util.leftPad(id_proceso, 32, ' ')
@@ -22,7 +23,7 @@ class File:
       + " ".rjust(6) 
       + " ".rjust(10) 
       + Util.leftPad(str(nroCuentaBanco), 20, '0')
-      + Util.leftPad(str(comerRif), 20, '0')
+      + Util.leftPad(str(comerRif[1:].strip()), 20, '0')
       + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
       + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
       + Util.leftPad(str(total_registros), 6, '0')
@@ -80,11 +81,11 @@ class File:
               + Util.leftPad(str(tipoDoc), 3, '0')
               + Util.leftPad(str(registro.comerRif[1:].strip()), 15, '0')
               + Util.rightPad(str( (registro.contNombres + registro.contApellidos)), 40, ' ')
-              + "C" #duda
+              + "C" #Credito
               + Util.leftPad("0", 6,'0')
               + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
               + " ".rjust(23)
-              + " ".rjust(10) #duda
+              + " ".rjust(10) 
               + "".rjust(30, "0")
               + Util.rightPad(str(conceptoMov), 40,'0')
               + "0"

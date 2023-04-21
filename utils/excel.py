@@ -7,9 +7,9 @@ from utils.utilitis import Util
 from classes.Historico import Historico
 
 class Excel:
-  def make_report_excel(resultList: List[Historico], afiliado: str):
-    print('make_report_excel')
-    fecha = datetime.now().strftime("%Y%m%d") 
+  def make_report_excel(date: datetime, resultList: List[Historico], afiliado: str):
+    # print('make_report_excel')
+    fecha = date.strftime("%Y%m%d") 
     fileName = rutaArchivo + "\\" + fecha + ".xlsx"
     hoja = "ArchivoPagoComercios"
 

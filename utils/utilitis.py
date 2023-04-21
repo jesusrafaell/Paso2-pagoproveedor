@@ -78,8 +78,10 @@ class Util:
         tipoDoc = "01"
         if rif_prefix == "V":
             tipoDoc = "01"
-        elif rif_prefix in ["P", "J"]:
+        elif rif_prefix == "P":
             tipoDoc = "02"
+        elif rif_prefix == "J":
+            tipoDoc = "04"
         elif rif_prefix == "E":
             tipoDoc = "08"
         return tipoDoc

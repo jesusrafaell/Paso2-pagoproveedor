@@ -14,8 +14,14 @@ resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDate = "230301"  # Test specific date
+strDateX = "230424"  # Test specific date
 control = excelControl = 0
 print(strDate)
+
+
+fecha = datetime.strptime(strDateX, "%y%m%d")
+
+date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
 
 i = 0
 if (cnxn):
@@ -25,7 +31,7 @@ if (cnxn):
 
     if(len(result)):
       #Generate excel from Historico
-      Excel.make_report_excel(result, nroAfiliado)
+      Excel.make_report_excel(date, result, nroAfiliado)
 
       print("Cantidad Resgistros ",  len(result))
 
@@ -43,15 +49,11 @@ if (cnxn):
 
       nombre_archivo = lotefile + str(numeroLote).zfill(2)
 
-      fecha = datetime.strptime(strDate, "%y%m%d")
-
-      date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
-
       print('Hoy', ahora)
       print('Dia que se corrio', date)
 
       #Ficheros
-      nombre_archivo_bangente = fecha.strftime("%Y%m%d") + "PAGO"
+      nombre_archivo_bangente = fecha.strftime("%Y%m%d") + "PAGOS01"
       fichero = os.path.join(rutaArchivo, nombre_archivo_bangente + ".txt")
       # archivo_xls = os.path.join(ruta_archivo, nombre_archivo + ".xls")
       log = os.path.join(rutaArchivo, "logApp.txt")
