@@ -93,7 +93,7 @@ class Util:
             return "3"
 
     def convierteFechaSql(fecha: str) -> Union[None, datetime.date]:
-        print(fecha)
+        # print(fecha)
         try:
             fechaUtil = datetime.strptime(fecha, '%d-%m-%Y')
         except ValueError:
