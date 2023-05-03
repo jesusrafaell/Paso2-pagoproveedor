@@ -80,6 +80,8 @@ class Historico:
             historico.hisAmountComisionBanco = row['hisAmountComisionBanco']
             historico.hisAmountTotal = row['hisAmountTotal']
             historico.hisFechaEjecucion = row['hisFechaEjecucion']
+            historico.hisFecha = row['hisFechaEjecucion']
+            historico.hisFechaProceso = row['hisFechaProceso']
             historico.aboCodBanco = row['comerCodigoBanco']
             historico.aboNroCuenta = row['comerCuentaBanco']
             historico.aboNroCuentaBanco = row['aboNroCuenta']
@@ -97,9 +99,7 @@ class Historico:
             historico.contMail = row['contMail']
             historico.afiDesc = row['afiDesc']
             historico.afiCodTipoPer = row['afiCodTipoPer']
-            historico.hisFecha = row['hisFechaEjecucion']
             historico.comerCodPadre = row['comerCodPadre']
-            historico.hisFechaProceso = row['hisFechaProceso']
 
             historicos.append(historico)
 

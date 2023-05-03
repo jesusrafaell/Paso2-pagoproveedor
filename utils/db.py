@@ -11,7 +11,6 @@ class Database:
         self.conn = None                
         self.entrada = None
     
-
     def conectar():
         try:		
             conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)

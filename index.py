@@ -1,19 +1,25 @@
 import time
 from classes.Historico import Historico
-from utils.db import Database
 from utils.excel import Excel
 from utils.sftp import sftp
 from variables import *
 from utils.writeFile import File 
 from datetime import datetime
 import os
+from utils.db import Database as db
 
-db = Database()
 cnxn = db.conectar()
 resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
-strDateX = "230301"  # Test specific date
+#Test SP
+strDateX = "230428"  # Test specific date
+
+#Test
+# strDate = "230503"
+# ahora= datetime.strptime("230503", "%y%m%d")
+##############
+
 control = excelControl = 0
 print(strDate)
 
@@ -29,8 +35,16 @@ if cnxn:
   print("Connected to DB")
   result = Historico.getHistoricoPagoList(strDateX, cnxn) # Get Historico
 
+  print(len(result))
+
   if len(result):
     print('Number of records: ', len(result))
+
+    #Test
+    aux = list(result)
+    while len(result) < 500:
+        result.extend(aux)
+    print('Generate: ', len(result))
 
     # Generate excel from Historico
     Excel.make_report_excel(date, result, nroAfiliado)
@@ -71,7 +85,7 @@ if cnxn:
     #   log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
   else:
     print("No records found")
-    log.write(datetime.now() + " Error: " + "No records found" + "\n")
+    log.write(str(datetime.now()) + " Error: " + "No records found" + "\n")
 else:
   print("Error connecting to DB")
   log.write(datetime.now() + "Error connecting to DB" + "No records found" + "\n")
