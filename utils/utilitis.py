@@ -3,6 +3,11 @@ from typing import List, Tuple, Union
 from classes.Historico import Historico
 
 class Util:
+    def rounder (num: float):
+        if num.is_integer():
+            return  str(int(num)) + '.00'
+        else:
+            return "{:.2f}".format(num)
         
     @staticmethod
     def convierteFechaSql(fecha):

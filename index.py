@@ -7,7 +7,10 @@ from utils.writeFile import File
 from datetime import datetime
 import os
 from utils.db import Database as db
+import sys
 
+
+generar = int(sys.argv[1] if len(sys.argv) > 1 else 0)
 cnxn = db.conectar()
 resultado = []
 ahora = datetime.now()
@@ -42,9 +45,10 @@ if cnxn:
 
     #Test
     aux = list(result)
-    while len(result) < 500:
-        result.extend(aux)
-    print('Generate: ', len(result))
+    if generar:
+        while len(result) < generar:
+            result.extend(aux)
+        print('Generate: ', len(result))
 
     # Generate excel from Historico
     Excel.make_report_excel(date, result, nroAfiliado)

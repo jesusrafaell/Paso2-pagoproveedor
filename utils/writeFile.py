@@ -25,8 +25,8 @@ class File:
       + " ".rjust(10) 
       + Util.leftPad(str(nroCuentaBanco), 20, '0')
       + Util.leftPad(str(comerRif[1:].strip()), 20, '0')
-      + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
-      + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+      + Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0')
+      + Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0')
       + Util.leftPad(str(total_registros), 6, '0')
       + "00" 
       + Util.leftPad(str(nombre_archivo), 7, '0') #basado en el excel
@@ -85,7 +85,7 @@ class File:
                 + Util.rightPad(str( (registro.contNombres + registro.contApellidos)), 40, ' ')
                 + "C" #Credito
                 + Util.leftPad("0", 6,'0')
-                + Util.leftPad(str(montoTotal).replace(",", "").replace(".", ","), 23, '0')
+                + Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0')
                 + " ".rjust(23)
                 + " ".rjust(10) 
                 + "".rjust(30, "0")
@@ -104,7 +104,7 @@ class File:
                 4,
                 registro.contMail,
                 registro.comerRif,
-                registro.hisAmountTotal
+                Util.rounder(registro.hisAmountTotal)
               )
 
               db.saveLoteDetalle(loteDetalle1, cnxn)
@@ -123,7 +123,7 @@ class File:
                 nombre_archivo, 
                 registro.hisId,
                 5,
-                registro.hisAmountTotal,
+                Util.rounder(registro.hisAmountTotal),
                 registro.comerDesc,
                 tipoCuentaAbono,
                 registro.aboNroCuentaBanco,
@@ -150,7 +150,7 @@ class File:
             loteCabecera.lotCodMonedaDeb = "VES"
             loteCabecera.lotCuentaDebito = cuentaDebito
             loteCabecera.lotFechaValor = formatted_cabecera
-            loteCabecera.lotMontoTotal = montoTotal
+            loteCabecera.lotMontoTotal = Util.rounder(montoTotal)
             loteCabecera.lotMotivoOpe = 000
             loteCabecera.lotNumLote = nombre_archivo
             loteCabecera.lotTipoRegistro = 9

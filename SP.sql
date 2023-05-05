@@ -35,6 +35,7 @@ BEGIN
     hisFechaProceso,
     comerCodigoBanco,
     comerCuentaBanco,
+    ct.rif as comerRifBanco,
 		case when (ct.id <> 0 or ct.id <> '0') then ct.nro_cuenta else aboNroCuenta end as aboNroCuenta,
 		a.aboNroCuenta as comerCuentaBanco,
     aboTipoCuenta,
