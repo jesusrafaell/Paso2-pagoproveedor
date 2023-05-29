@@ -33,7 +33,7 @@ class Historico:
         self.hisAmountTDCImpuesto = 0.0
         self.hisAmountIVA = 0.0
         self.hisAmountComisionBanco = 0.0
-        self.hisAmountTotal = None
+        self.hisAmountTotal = 0.00
         self.hisFecha = None
         self.hisFechaProceso = None
         self.hisFechaEjecucion = None
@@ -78,7 +78,7 @@ class Historico:
             historico.hisAmountTDCImpuesto = row['hisAmountTDCImpuesto']
             historico.hisAmountIVA = row['hisAmountIVA']
             historico.hisAmountComisionBanco = row['hisAmountComisionBanco']
-            historico.hisAmountTotal = row['hisAmountTotal']
+            historico.hisAmountTotal = float(row['hisAmountTotal'])
             historico.hisFechaEjecucion = row['hisFechaEjecucion']
             historico.hisFecha = row['hisFechaEjecucion']
             historico.hisFechaProceso = row['hisFechaProceso']

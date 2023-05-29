@@ -16,7 +16,8 @@ resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 #Test SP
-strDateX = "230428"  # Test specific date
+strDateX = "230426"  # Test specific date 100
+# strDateX = "230502"  # Test specific date 14.900
 
 #Test
 # strDate = "230503"
@@ -47,7 +48,13 @@ if cnxn:
     aux = list(result)
     if generar:
         while len(result) < generar:
-            result.extend(aux)
+          cont = 0
+          for registro in result:
+            if cont == generar:
+              break
+            result.append(registro)
+            cont += 1
+            print('cont de registros', cont)
         print('Generate: ', len(result))
 
     # Generate excel from Historico

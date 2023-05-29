@@ -12,7 +12,7 @@ import os
 codigoClient = codigoClienteDev #Desarrollo
 
 class File:
-  def getLine0(id_proceso: str,numeroLote: str, nroCuentaBanco: str, comerRif: str, montoTotal: str, nombre_archivo: str, total_registros: str) -> str:
+  def getLine0(id_proceso: str,numeroLote: str, nroCuentaBanco: str, comerRif: str, montoTotal: float, nombre_archivo: str, total_registros: str) -> str:
     # print(comerRif, comerRif[1:].strip() )
     return (
       "01"
@@ -41,14 +41,27 @@ class File:
 
             id_proceso = formatted_date + formatted_time + codigoClient.rjust(12, "0") + "019" + "000"
             # Get montototal del archivo
-            montoTotal = 0
             comerRif, nroCuentaBanco = Util.get_dataBanco(arr)
 
+            montoTotal = float(0)
+            # contx = float(0) + 1
+
             for registro in arr:
-                # comerRif = registro.comerRifBanco;
-                # nroCuentaBanco = registro.aboNroCuentaBanco;
                 montoTotal += registro.hisAmountTotal
-            
+
+                # print('-->', registro.hisId, registro.hisAmountTotal)
+                # registro.hisAmountTotal = contx
+                # montoTotal += contx
+                # contx  += 1
+
+                # if registro.hisAmountTotal > 1:
+                #   print(montoTotal, 'mayor')
+                #   print(registro.hisId,registro.aboTerminal, registro.hisFechaEjecucion, registro.hisFechaProceso)
+
+                # if registro.aboNroCuenta[0:4] == '0146': #si es de bangente
+                #   print(registro.hisId,registro.aboTerminal, registro.hisFechaEjecucion, registro.hisFechaProceso)
+
+            print(montoTotal)
             # print("header",nroCuentaBanco, comerRif)
 
             # print("Monto Total:", montoTotal)
@@ -57,11 +70,19 @@ class File:
             file.write(line0 + "\r")
 
             cont = 1
+            montoTotal = float(0)
+            aux = float(0)
+            # contx2 = float(0) + 1
             for registro in arr:
 
               loteDetalle2 = LoteDetalle()
 
               montoTotal = registro.hisAmountTotal
+              aux += montoTotal
+              # registro.hisAmountTotal = contx
+              # montoTotal += contx2
+              # contx  += 1
+              # print('2 -->', registro.hisId, montoTotal)
               id_proceso = formatted_date + formatted_time + codigoClient.rjust(12, "0") + "019" + "000"
               tipoDoc = Util.get_rif_prefix(registro.comerRif[0])
               conceptoMov =  (
@@ -94,6 +115,8 @@ class File:
                 + "00"
               )
 
+              # print(Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0'))
+
               cont += 1
 
               #Linea 1 save
@@ -107,7 +130,8 @@ class File:
                 Util.rounder(registro.hisAmountTotal)
               )
 
-              db.saveLoteDetalle(loteDetalle1, cnxn)
+              #inset
+              # db.saveLoteDetalle(loteDetalle1, cnxn)
 
               tipoCuentaAbono = Util.getTipoCuentaAbono(registro.aboCodBanco)
 
@@ -136,11 +160,14 @@ class File:
                 00,
                 cuentaDebito
               )
-              db.saveLoteDetalle(loteDetalle2, cnxn)
+
+              #inset
+              # db.saveLoteDetalle(loteDetalle2, cnxn)
               
               file.write(line1 + "\r")
             #end for
 
+            print('monto afeter registros', Util.rounder(aux).replace(',','').replace(".", ","))
             formatted_cabecera = ahora.strftime('%Y-%m-%d')
             loteCabecera = LotesBanco()
             loteCabecera.lotActividadEcom = 00
@@ -154,7 +181,8 @@ class File:
             loteCabecera.lotMotivoOpe = 000
             loteCabecera.lotNumLote = nombre_archivo
             loteCabecera.lotTipoRegistro = 9
-            db.saveLoteCabecera(loteCabecera, nroAfiliado, cnxn)
+            #inset
+            # db.saveLoteCabecera(loteCabecera, nroAfiliado, cnxn)
       else: 
         print("error writeFile")
     except Exception as e:
