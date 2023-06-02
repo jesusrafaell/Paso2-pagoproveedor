@@ -15,25 +15,20 @@ cnxn = db.conectar()
 resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
+strDateX =  strDate
 #Test SP
-strDateX = "230426"  # Test specific date 100
+# strDateX = "230426"  # Test specific date 100
 # strDateX = "230502"  # Test specific date 14.900
-
-#Test
-# strDate = "230503"
-# ahora= datetime.strptime("230503", "%y%m%d")
 ##############
 
-control = excelControl = 0
-print(strDate)
+print('fecha', strDate)
 
 fecha = datetime.strptime(strDate, "%y%m%d")
 date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
 
 #Log
-log = os.path.join(rutaArchivo, "logApp.txt")
-if not os.path.exists(log):
-  open(log, "w").close()
+log_file = os.path.join(rutaArchivo, "logApp.txt")
+log = open(log_file, "a")
 
 if cnxn:
   print("Connected to DB")
@@ -95,8 +90,9 @@ if cnxn:
     #   print('Process error SFTP!!')
     #   log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
   else:
-    print("No records found")
-    log.write(str(datetime.now()) + " Error: " + "No records found" + "\n")
+    print("No existen registros")
+    log.write(str(strDate + " Error: " + "No records found" + "\n"))
 else:
   print("Error connecting to DB")
   log.write(datetime.now() + "Error connecting to DB" + "No records found" + "\n")
+log.close()

@@ -1,16 +1,16 @@
 #qa
-# server= "10.198.73.35"
-# database = "milpagos"
-# afiliado = "milpagos"
-# username = "amendoza"
-# password = "Am1523246."
+server= "10.198.73.35"
+database = "milpagos"
+afiliado = "milpagos"
+username = "amendoza"
+password = "Am1523246."
 
 #prod
-server= "10.198.71.45"
-database = "MilPagos"
-afiliado = "milpagos"
-username = "usr_milpagos"
-password = "usr_milpagos"
+# server= "10.198.71.45"
+# database = "MilPagos"
+# afiliado = "milpagos"
+# username = "usr_milpagos"
+# password = "usr_milpagos"
 #
 rutaArchivo = r"C:\\archivos\\Reportes_MilPagos\\BGENTE"
 cuentaDebito = "0000001040107160107199659"
