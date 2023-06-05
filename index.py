@@ -16,6 +16,7 @@ resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
+
 #Test SP
 # strDateX = "230426"  # Test specific date 100
 # strDateX = "230502"  # Test specific date 14.900
@@ -26,8 +27,17 @@ print('fecha', strDate)
 fecha = datetime.strptime(strDate, "%y%m%d")
 date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
 
+# Verificar si la ruta existe y crearla si no
+if not os.path.exists(rutaArchivo):
+    os.makedirs(rutaArchivo)
+
 #Log
 log_file = os.path.join(rutaArchivo, "logApp.txt")
+# Crear el archivo si no existe
+if not os.path.exists(log_file):
+    open(log_file, "w").close()
+
+#Abrir archivo los
 log = open(log_file, "a")
 
 if cnxn:

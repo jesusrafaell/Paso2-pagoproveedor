@@ -1,16 +1,3 @@
-USE [MilPagos]
-GO
-/****** Object:  StoredProcedure [dbo].[SP_consultaHistoricoPago_BGENTE]    Script Date: 5/3/2023 11:36:59 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		mggy@sistemasemsys.com
--- Create date: 17/11/2016
--- Description:	Consulta la información de un Pago a Comercio
--- =============================================
 ALTER PROCEDURE [dbo].[SP_consultaHistoricoPago_BGENTE]
 	@fecha date,
 	@tipoConsulta int

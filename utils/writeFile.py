@@ -61,7 +61,7 @@ class File:
                 # if registro.aboNroCuenta[0:4] == '0146': #si es de bangente
                 #   print(registro.hisId,registro.aboTerminal, registro.hisFechaEjecucion, registro.hisFechaProceso)
 
-            print(montoTotal)
+            # print('Monto toal', montoTotal)
             # print("header",nroCuentaBanco, comerRif)
 
             # print("Monto Total:", montoTotal)
@@ -167,7 +167,7 @@ class File:
               file.write(line1 + "\r")
             #end for
 
-            print('monto afeter registros', Util.rounder(aux).replace(',','').replace(".", ","))
+            # print('monto afeter registros', Util.rounder(aux).replace(',','').replace(".", ","))
             formatted_cabecera = ahora.strftime('%Y-%m-%d')
             loteCabecera = LotesBanco()
             loteCabecera.lotActividadEcom = 00
