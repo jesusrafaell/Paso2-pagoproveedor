@@ -10,17 +10,36 @@ from utils.db import Database as db
 import sys
 
 
-generar = int(sys.argv[1] if len(sys.argv) > 1 else 0)
-cnxn = db.conectar()
+agregador = sys.argv[1];
+generar = int(sys.argv[2] if len(sys.argv) > 2 else 0)
+server = ''
+database = ''
+username = ''
+password = ''
+rutaArchivo = ''
+nroAfiliado = ''
+if agregador.lower() == 'milpagos':
+  server = server_m
+  database = database_m
+  username = username_m
+  password = password_m
+  rutaArchivo = rutaArchivo_m
+elif agregador.lower() == 'carropago': 
+  server = server_c
+  database = database_c
+  username = username_c
+  password = password_c
+  rutaArchivo = rutaArchivo_c
+else:
+  print('No existe ese agregador')
+  sys.exit()
+print(server, database, username, password)
+cnxn = db.conectar(server, database, username, password)
 resultado = []
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
-
-#Test SP
-# strDateX = "230426"  # Test specific date 100
-# strDateX = "230502"  # Test specific date 14.900
-##############
+strDateX = "230604"  # Test specific date 100
 
 print('fecha', strDate)
 
@@ -63,7 +82,7 @@ if cnxn:
         print('Generate: ', len(result))
 
     # Generate excel from Historico
-    Excel.make_report_excel(date, result, nroAfiliado)
+    Excel.make_report_excel(date, result, nroAfiliado, rutaArchivo)
 
     day = datetime.now().day
     month = datetime.now().month

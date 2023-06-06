@@ -9,7 +9,8 @@ import traceback
 from typing import List
 import os
 
-codigoClient = codigoClienteDev #Desarrollo
+# codigoClient = codigoClienteDev #Desarrollo
+codigoClient = codigoClienteProd #Prod
 
 class File:
   def getLine0(id_proceso: str,numeroLote: str, nroCuentaBanco: str, comerRif: str, montoTotal: float, nombre_archivo: str, total_registros: str) -> str:
