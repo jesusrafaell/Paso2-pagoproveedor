@@ -32,7 +32,7 @@ if not os.path.exists(rutaArchivo):
     os.makedirs(rutaArchivo)
 
 #Log
-log_file = os.path.join(rutaArchivo, "logApp.txt")
+log_file = os.path.join(rutaLog, "logApp.txt")
 # Crear el archivo si no existe
 if not os.path.exists(log_file):
     open(log_file, "w").close()
