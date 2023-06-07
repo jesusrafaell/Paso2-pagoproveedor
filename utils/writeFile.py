@@ -1,3 +1,4 @@
+import unicodedata
 from classes.LoteBanco import LotesBanco
 from variables import *
 from datetime import datetime
@@ -33,10 +34,10 @@ class File:
       + Util.leftPad(str(nombre_archivo), 7, '0') #basado en el excel
     ) 
 
-  def writeFile(arr: List[Historico], ahora: datetime, fichero: str, numeroLote: int, nombre_archivo:str, cnxn, log):
+  def writeFile(arr: List[Historico], ahora: datetime, fichero: str, numeroLote: int, nombre_archivo:str, cnxn, log, afiliado):
     try:
       if not os.path.exists(fichero):
-        with open(fichero, "w") as file:
+        with open(fichero, "w", encoding="utf-8") as file:
             formatted_time = ahora.strftime("%H%M%S")
             formatted_date = ahora.strftime('%Y%m%d')
 
@@ -62,8 +63,6 @@ class File:
                 # if registro.aboNroCuenta[0:4] == '0146': #si es de bangente
                 #   print(registro.hisId,registro.aboTerminal, registro.hisFechaEjecucion, registro.hisFechaProceso)
 
-            # print('Monto toal', montoTotal)
-            # print("header",nroCuentaBanco, comerRif)
 
             # print("Monto Total:", montoTotal)
             line0 = File.getLine0(id_proceso, numeroLote, nroCuentaBanco,comerRif,montoTotal,nombre_archivo,len(arr))
@@ -73,17 +72,15 @@ class File:
             cont = 1
             montoTotal = float(0)
             aux = float(0)
-            # contx2 = float(0) + 1
-            for registro in arr:
 
-              loteDetalle2 = LoteDetalle()
+            #Guardar en archivo
+            for registro in arr:
 
               montoTotal = registro.hisAmountTotal
               aux += montoTotal
               # registro.hisAmountTotal = contx
               # montoTotal += contx2
               # contx  += 1
-              # print('2 -->', registro.hisId, montoTotal)
               id_proceso = formatted_date + formatted_time + codigoClient.rjust(12, "0") + "019" + "000"
               tipoDoc = Util.get_rif_prefix(registro.comerRif[0])
               conceptoMov =  (
@@ -92,8 +89,19 @@ class File:
                 + " "
                 + registro.aboTerminal.strip()
                 + " "
-                + str(registro.hisFecha.strftime("%Y-%m-%d"))
+                + str(registro.hisFecha.strftime("%Y-%m-%d").strip())
               )
+
+
+              nombre_completo = (registro.contNombres.strip() + registro.contApellidos.strip())
+
+              # print('in', nombre_completo)
+
+              # Eliminar caracteres especiales
+              nombre_sin_especiales = Util.delete_sings(unicodedata.normalize('NFKD', nombre_completo).encode('ASCII', 'ignore').decode('utf-8'))
+
+              # print('out', nombre_sin_especiales)
+
 
               line1 = (
                 "01"
@@ -101,22 +109,20 @@ class File:
                 + "01"
                 + Util.leftPad(str(cont), 10, '0')
                 + Util.leftPad(str(numeroLote), 10, '0')
-                + Util.leftPad(str(registro.aboNroCuenta), 20, '0')
+                + Util.leftPad(str(registro.aboNroCuenta.strip()), 20, '0')
                 + Util.leftPad(str(tipoDoc), 3, '0')
                 + Util.leftPad(str(registro.comerRif[1:].strip()), 15, '0')
-                + Util.rightPad(str( (registro.contNombres + registro.contApellidos)), 40, ' ')
+                + Util.rightPad(nombre_sin_especiales, 40, ' ')
                 + "C" #Credito
                 + Util.leftPad("0", 6,'0')
                 + Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0')
                 + " ".rjust(23)
                 + " ".rjust(10) 
                 + "".rjust(30, "0")
-                + Util.rightPad(str(conceptoMov), 40,'0')
+                + Util.rightPad(str(conceptoMov.strip()), 40,'0')
                 + "0"
                 + "00"
               )
-
-              # print(Util.leftPad(str(Util.rounder(montoTotal)).replace(",", "").replace(".", ","), 23, '0'))
 
               cont += 1
 
@@ -143,6 +149,7 @@ class File:
                       + str(registro.hisFecha.strftime("%Y-%m-%d"))+ "");
 
               #Linea 2 save
+              loteDetalle2 = LoteDetalle()
               loteDetalle2 = LoteDetalle.init__line2(
                 "D0U", 
                 nombre_archivo, 

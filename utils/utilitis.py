@@ -1,8 +1,19 @@
 import datetime
 from typing import List, Tuple, Union
 from classes.Historico import Historico
+import re
 
 class Util:
+    @staticmethod
+    def delete_sings(cadena):
+        # Definir el patrón de caracteres especiales
+        patron = r'[^a-zA-Z0-9\s]'
+        
+        # Eliminar los caracteres especiales utilizando expresiones regulares
+        cadena_sin_especiales = re.sub(patron, '', cadena)
+    
+        return cadena_sin_especiales
+
     def rounder (num: float):
         if num.is_integer():
             return  str(int(num)) + '.00'

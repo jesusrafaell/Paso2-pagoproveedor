@@ -10,25 +10,34 @@ from utils.db import Database as db
 import sys
 
 
+ahora = datetime.now()
+strDate = ahora.strftime("%y%m%d")
+strDateX =  strDate
+# strDateX = "230604"  # YYMMDD
+
 agregador = sys.argv[1];
-generar = int(sys.argv[2] if len(sys.argv) > 2 else 0)
+if len(sys.argv) > 2:
+  strDateX = sys.argv[2]
 server = ''
 database = ''
 username = ''
 password = ''
 rutaArchivo = ''
 nroAfiliado = ''
+afiliado = ''
 if agregador.lower() == 'milpagos':
   server = server_m
   database = database_m
   username = username_m
   password = password_m
+  afiliado = afiliado_m
   rutaArchivo = rutaArchivo_m
 elif agregador.lower() == 'carropago': 
   server = server_c
   database = database_c
   username = username_c
   password = password_c
+  afiliado = afiliado_c
   rutaArchivo = rutaArchivo_c
 else:
   print('No existe ese agregador')
@@ -36,12 +45,9 @@ else:
 print(server, database, username, password)
 cnxn = db.conectar(server, database, username, password)
 resultado = []
-ahora = datetime.now()
-strDate = ahora.strftime("%y%m%d")
-strDateX =  strDate
-strDateX = "230604"  # Test specific date 100
 
-print('fecha', strDate)
+print('Hoy:', strDate)
+print('Date:', strDateX)
 
 fecha = datetime.strptime(strDate, "%y%m%d")
 date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
@@ -51,7 +57,7 @@ if not os.path.exists(rutaArchivo):
     os.makedirs(rutaArchivo)
 
 #Log
-log_file = os.path.join(rutaArchivo, "logApp.txt")
+log_file = os.path.join(rutaLog, "logApp.txt")
 # Crear el archivo si no existe
 if not os.path.exists(log_file):
     open(log_file, "w").close()
@@ -68,18 +74,19 @@ if cnxn:
   if len(result):
     print('Number of records: ', len(result))
 
-    #Test
-    aux = list(result)
-    if generar:
-        while len(result) < generar:
-          cont = 0
-          for registro in result:
-            if cont == generar:
-              break
-            result.append(registro)
-            cont += 1
-            print('cont de registros', cont)
-        print('Generate: ', len(result))
+    #Generar N lineas
+    # aux = list(result)
+    # generar = 0
+    # if generar:
+    #     while len(result) < generar:
+    #       cont = 0
+    #       for registro in result:
+    #         if cont == generar:
+    #           break
+    #         result.append(registro)
+    #         cont += 1
+    #         print('cont de registros', cont)
+    #     print('Generate: ', len(result))
 
     # Generate excel from Historico
     Excel.make_report_excel(date, result, nroAfiliado, rutaArchivo)
@@ -101,8 +108,20 @@ if cnxn:
     print('Date that was run:', date)
 
     #Ficheros
+    nombre_base = fecha.strftime("%Y%m%d") + "PAGOS"
     nombre_archivo_bangente = fecha.strftime("%Y%m%d") + "PAGOS01"
     fichero = os.path.join(rutaArchivo, nombre_archivo_bangente + ".txt")
+    i = 1
+    while True:
+        nombre_archivo_bangente = nombre_base + str(i).zfill(2)
+        fichero = os.path.join(rutaArchivo, nombre_archivo_bangente + ".txt")
+
+        if os.path.exists(fichero):
+            # El archivo existe, intentar con el siguiente número
+            i += 1
+        else:
+            # El archivo no existe, utilizar este nombre
+            break
 
     print("Nombre archivo", nombre_archivo_bangente)
 
@@ -110,7 +129,7 @@ if cnxn:
       os.remove(fichero)
 
     # Generate Archivo for banc txt
-    File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn, log)
+    File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn, log, afiliado )
 
     # if sftp(fichero, nombre_archivo_bangente + '.txt'):
     #   print('Process completed!!')

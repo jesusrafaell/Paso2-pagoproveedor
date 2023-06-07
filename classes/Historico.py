@@ -46,8 +46,6 @@ class Historico:
         params = (fecha, '1')
         cursor = cnxn.cursor().execute(SPsql, params)
 
-        # print('__________________________________________________\n')
-
         # Obtener los nombres de las columnas
         column_names = [column[0] for column in cursor.description]
 

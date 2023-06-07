@@ -1,3 +1,4 @@
+import os
 from typing import List
 from datetime import datetime
 from variables import *
@@ -10,8 +11,20 @@ class Excel:
   def make_report_excel(date: datetime, resultList: List[Historico], afiliado: str , rutaArchivo):
     # print('make_report_excel')
     fecha = date.strftime("%Y%m%d") 
-    fileName = rutaArchivo + "\\" + fecha + ".xlsx"
+    fileName = rutaArchivo + "\\" + fecha + '_1' + ".xlsx"
     hoja = "ArchivoPagoComercios"
+
+    i = 1
+    while True:
+        fileName = rutaArchivo + "\\" + fecha + '_' + str(i).zfill(2) + ".xlsx"
+        fichero = os.path.join(rutaArchivo, fileName)
+
+        if os.path.exists(fichero):
+            # El archivo existe, intentar con el siguiente número
+            i += 1
+        else:
+            # El archivo no existe, utilizar este nombre
+            break
 
     header = ["Numero Pago a Proveedor", "RIF", "Beneficiario", "Banco Beneficiario", "Cuenta Beneficiario", "Concepto", "Monto", "Terminal"]
     title = "ArchivoPagoAComercios"

@@ -1,0 +1,177 @@
+Error: name 'afiliado' is not defined
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 139, in writeFile
+    lotConceptoPago = ("Abono por concepto " + afiliado + " comercio: "
+NameError: name 'afiliado' is not defined
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 168, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 169, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 167, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 168, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 169, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 172, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 174, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 174, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 174, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 175, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 174, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 174, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 175, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: can only concatenate str (not "bytes") to str
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 98, in writeFile
+    "01"
+TypeError: can only concatenate str (not "bytes") to str
+
+Error: can only concatenate str (not "bytes") to str
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 98, in writeFile
+    "01"
+TypeError: can only concatenate str (not "bytes") to str
+
+Error: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 178, in writeFile
+    file.write(line1 + "\r")
+  File "C:\Python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\x81' in position 119: character maps to <undefined>
+
+Error: 'bytes' object has no attribute 'encode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 97, in writeFile
+    nombre_sin_especiales = unidecode(nombre_completo)
+  File "C:\Python310\lib\site-packages\unidecode\__init__.py", line 60, in unidecode_expect_ascii
+    bytestring = string.encode('ASCII')
+AttributeError: 'bytes' object has no attribute 'encode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 96, in writeFile
+    nombre_completo = (registro.contNombres.strip() + registro.contApellidos.strip()).decode('utf-8')
+AttributeError: 'str' object has no attribute 'decode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 98, in writeFile
+    nombre_completo = (registro.contNombres.strip() + registro.contApellidos.strip()).decode('utf-8')
+AttributeError: 'str' object has no attribute 'decode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 98, in writeFile
+    nombre_completo = (registro.contNombres.strip() + registro.contApellidos.strip()).decode('utf-8')
+AttributeError: 'str' object has no attribute 'decode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 117, in writeFile
+    + Util.rightPad(nombre_completo_padded.decode('utf-8'), 40, ' ')
+AttributeError: 'str' object has no attribute 'decode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 119, in writeFile
+    + Util.rightPad(nombre_completo_padded.decode('utf-8'), 40, ' ')
+AttributeError: 'str' object has no attribute 'decode'
+
+Error: 'str' object has no attribute 'decode'
+Traceback (most recent call last):
+  File "C:\workTranred\python\LoteMilPagosBGente\utils\writeFile.py", line 119, in writeFile
+    + Util.rightPad(nombre_completo_padded.decode('utf-8'), 40, ' ')
+AttributeError: 'str' object has no attribute 'decode'
+
+230607 Error: No records found
+230607 Error: No records found
+230607 Error: No records found
