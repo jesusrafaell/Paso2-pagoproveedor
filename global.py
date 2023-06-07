@@ -16,12 +16,34 @@ ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
 # strDateX = "230604"  # YYMMDD
-server = server_m
-database = database_m
-username = username_m
-password = password_m
-afiliado = afiliado_m
-rutaArchivo = rutaArchivo_m
+
+agregador = 'milpagos' #sys.argv[1];
+if len(sys.argv) > 2:
+  strDateX = sys.argv[2]
+server = ''
+database = ''
+username = ''
+password = ''
+rutaArchivo = ''
+nroAfiliado = ''
+afiliado = ''
+if agregador.lower() == 'milpagos':
+  server = server_m
+  database = database_m
+  username = username_m
+  password = password_m
+  afiliado = afiliado_m
+  rutaArchivo = rutaArchivo_m
+elif agregador.lower() == 'carropago': 
+  server = server_c
+  database = database_c
+  username = username_c
+  password = password_c
+  afiliado = afiliado_c
+  rutaArchivo = rutaArchivo_c
+else:
+  print('No existe ese agregador')
+  sys.exit()
 print(server, database, username, password)
 cnxn = db.conectar(server, database, username, password)
 resultado = []
