@@ -15,7 +15,7 @@ strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
 # strDateX = "230604"  # YYMMDD
 
-agregador = sys.argv[1];
+agregador = 'milpagos' #sys.argv[1];
 if len(sys.argv) > 2:
   strDateX = sys.argv[2]
 server = ''
@@ -131,12 +131,13 @@ if cnxn:
     # Generate Archivo for banc txt
     File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn, log, afiliado )
 
-    # if sftp(fichero, nombre_archivo_bangente + '.txt'):
-    #   print('Process completed!!')
-    #   log.write(datetime.now() + " Error: " + 'Process completed!!' + "\n")
-    # else:
-    #   print('Process error SFTP!!')
-    #   log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
+    #Pasar el archivo
+    if sftp(fichero, nombre_archivo_bangente + '.txt'):
+      print('Process completed SFTP!!')
+      # log.write(datetime.now() + " Error: " + 'Process completed!!' + "\n")
+    else:
+      print('Process error SFTP!!')
+      log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
   else:
     print("No existen registros")
     log.write(str(strDate + " Error: " + "No records found" + "\n"))
