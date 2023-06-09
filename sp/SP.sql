@@ -39,12 +39,6 @@ BEGIN
     afiDesc,
     afiCodTipoPer,
     comerCodPadre
-		-- --aboCodBanco,
-		-- case when (ct.id <> 0 or ct.id <> '0') then ct.cod_banco else aboCodBanco end as aboCodBanco,
-		-- --afiCodBan,
-		-- case when (ct.id <> 0 or ct.id <> '0') then ct.cod_banco else afiCodBan end as afiCodBan,
-		-- --afiNroCuenta
-		-- case when (ct.id <> 0 or ct.id <> '0') then ct.nro_cuenta else afiNroCuenta end as afiNroCuenta
 		FROM Historico h 
       INNER JOIN Abonos a ON h.aboCodAfi = a.aboCodAfi 
       and h.aboCodComercio = a.aboCodComercio 
@@ -56,6 +50,7 @@ BEGIN
       LEFT JOIN cta_bank_pot ct ON ct.id = a.ref_bank
 		WHERE 
       convert(date ,h.hisFechaEjecucion) = @fecha 
+      and hisAmountTotal > 0
       and a.ref_bank = 1
 		ORDER BY h.aboCodComercio
 		

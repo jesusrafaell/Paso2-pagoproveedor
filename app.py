@@ -1,4 +1,3 @@
-import time
 from classes.Historico import Historico
 from utils.excel import Excel
 from utils.sftp import sftp
@@ -12,39 +11,36 @@ import sys
 #docker
 # docker run --env ARGUMENTO1=milpagos --env ARGUMENTO2=230604 lote_bangente
 
+# docker run --env ARGUMENTO1=milpagos --env ARGUMENTO2=30 --env ARGUMENTO3="C:\archivos\Reportes_MilPagos\BGENTE" --env ARGUMENTO4=10.198.71.45 --env ARGUMENTO5=milpagos --env ARGUMENTO6=usr_milpagos --env ARGUMENTO7=usr_milpagos --env ARGUMENTO8=720 --env ARGUMENTO9='230607' lote_bangente
+
+
+#run python:
+# python global.py "milpagos" "30" "C:\archivos\Reportes_MilPagos\BGENTE" "10.198.71.45" "milpagos" "usr_milpagos" "usr_milpagos" "720" "230607"
+
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
 # strDateX = "230604"  # YYMMDD
 
-agregador = 'milpagos' #sys.argv[1];
-if len(sys.argv) > 2:
-  strDateX = sys.argv[2]
-server = ''
-database = ''
-username = ''
-password = ''
-rutaArchivo = ''
-nroAfiliado = ''
-afiliado = ''
-if agregador.lower() == 'milpagos':
-  server = server_m
-  database = database_m
-  username = username_m
-  password = password_m
-  afiliado = afiliado_m
-  rutaArchivo = rutaArchivo_m
-elif agregador.lower() == 'carropago': 
-  server = server_c
-  database = database_c
-  username = username_c
-  password = password_c
-  afiliado = afiliado_c
-  rutaArchivo = rutaArchivo_c
-else:
-  print('No existe ese agregador')
-  sys.exit()
-print(server, database, username, password)
+# print('linea int', sys)
+print('Parametros:')
+for agr in sys.argv[1:]:
+  print(agr , end=', ')
+print('')
+print('-----------')
+
+# generar = int(sys.argv[1] if len(sys.argv) > 1 else 0)
+afiliado = sys.argv[1]
+reportBeginFile = sys.argv[2]
+rutaArchivo = sys.argv[3]
+server = sys.argv[4]
+database = sys.argv[5]
+username = sys.argv[6]
+password = sys.argv[7]
+nroAfiliado = sys.argv[8]
+if len(sys.argv) > 9:
+  strDateX = sys.argv[9]
+
 cnxn = db.conectar(server, database, username, password)
 resultado = []
 
@@ -70,8 +66,6 @@ log = open(log_file, "a")
 if cnxn:
   print("Connected to DB")
   result = Historico.getHistoricoPagoList(strDateX, cnxn) # Get Historico
-
-  print(len(result))
 
   if len(result):
     print('Number of records: ', len(result))
@@ -134,16 +128,16 @@ if cnxn:
     File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn, log, afiliado )
 
     #Pasar el archivo
-    if sftp(fichero, nombre_archivo_bangente + '.txt'):
-      print('Process completed SFTP!!')
-      # log.write(datetime.now() + " Error: " + 'Process completed!!' + "\n")
-    else:
-      print('Process error SFTP!!')
-      log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
+    # if sftp(fichero, nombre_archivo_bangente + '.txt'):
+    #   print('Process completed SFTP!!')
+    #   # log.write(datetime.now() + " Error: " + 'Process completed!!' + "\n")
+    # else:
+    #   print('Process error SFTP!!')
+    #   log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
   else:
     print("No existen registros")
     log.write(str(strDate + " Error: " + "No records found" + "\n"))
 else:
   print("Error connecting to DB")
-  log.write(datetime.now() + "Error connecting to DB" + "No records found" + "\n")
+  log.write(str(strDate + " Error connecting to DB " + "No records found" + "\n"))
 log.close()

@@ -15,7 +15,7 @@ import sys
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
 strDateX =  strDate
-# strDateX = "230604"  # YYMMDD
+#strDateX = "230611"  # YYMMDD
 server = server_m
 database = database_m
 username = username_m
@@ -112,12 +112,12 @@ if cnxn:
     File.writeFile(result, date, fichero, numeroLote, nombre_archivo, cnxn, log, afiliado )
 
     #Pasar el archivo
-    if sftp(fichero, nombre_archivo_bangente + '.txt'):
-      print('Process completed SFTP!!')
+    #if sftp(fichero, nombre_archivo_bangente + '.txt'):
+      #print('Process completed SFTP!!')
       # log.write(datetime.now() + " Error: " + 'Process completed!!' + "\n")
-    else:
-      print('Process error SFTP!!')
-      log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
+    #else:
+      #print('Process error SFTP!!')
+      #log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
   else:
     print("No existen registros")
     log.write(str(strDate + " Error: " + "No records found" + "\n"))

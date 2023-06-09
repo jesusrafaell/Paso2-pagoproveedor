@@ -16,7 +16,7 @@ class Database:
             conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
             return conexion
         except Exception as e:
-            print("Error al conectar a la base de datos", e)
+            print("Error al conectar a la base de datos:", e)
             return None
 
     def getCuentaBanco(cnxn):
