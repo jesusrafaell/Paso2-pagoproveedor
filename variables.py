@@ -1,18 +1,19 @@
 #qa
-# server= "10.198.73.35"
-# database = "milpagos"
-# afiliado = "milpagos"
-# username = "amendoza"
-# password = "Am1523246."
+server_m= "10.198.73.35"
+database_m = "MilPagos"
+afiliado_m = "milpagos"
+username_m = "s_sql_prd"
+password_m = "$TrPr0D22"
+rutaArchivo_m = r"C:\archivos\Reportes_MilPagos\BGENTE"
 
 #prod
 #milpagos
-server_m= "10.198.71.45"
-database_m = "MilPagos"
-afiliado_m = "milpagos"
-username_m = "usr_milpagos"
-password_m = "usr_milpagos"
-rutaArchivo_m = r"C:\archivos\Reportes_MilPagos\BGENTE"
+# server_m= "10.198.71.45"
+# database_m = "MilPagos"
+# afiliado_m = "milpagos"
+# username_m = "usr_milpagos"
+# password_m = "usr_milpagos"
+# rutaArchivo_m = r"C:\archivos\Reportes_MilPagos\BGENTE"
 
 #carropago
 server_c= "10.198.71.34"

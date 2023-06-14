@@ -19,13 +19,6 @@ class Database:
             print("Error al conectar a la base de datos:", e)
             return None
 
-    def getCuentaBanco(cnxn):
-        SPsql = "EXEC GetCuentaBanco"
-        result = cnxn.cursor().execute(SPsql)
-        row = result.fetchone()
-        # print (row[0])
-        return row[0]
-
     def getNumeroLote(compania,fecha ,cnxn):
         sql = "select ISNULL( MAX(SUBSTRING(lotNumLote,7,2)) , 0) as lote from Lotesxbanco where lotCodCompania = ? and SUBSTRING(lotNumLote,1,6) = ?"
         params = (compania, fecha)

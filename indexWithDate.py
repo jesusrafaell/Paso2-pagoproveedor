@@ -1,3 +1,4 @@
+
 import time
 from classes.Historico import Historico
 from utils.excel import Excel
@@ -14,8 +15,11 @@ import sys
 
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
+
 strDateX =  strDate
-strDateX = "230617"  # YYMMDD
+if len(sys.argv) > 1:
+  strDateX = sys.argv[1]
+
 server = server_m
 database = database_m
 username = username_m

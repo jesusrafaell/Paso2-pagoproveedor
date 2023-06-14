@@ -21,8 +21,10 @@ RUN mkdir /BGENTE
 # Cambiar el el openssl para acepte TLSv1.0 por problemas de compatibilidad
 RUN sed -i 's/SECLEVEL=2/SECLEVEL=1/g' /etc/ssl/openssl.cnf
 
-# Ejecuta el comando python index.py con parámetros
-CMD ["python", "index.py"]
+# Ejecuta el comando python index.py 
+# CMD ["python", "index.py"]
+# Ejecuta el comando python index.py 
+CMD ["python", "indexWithDate.py"]
 
 # docker build -t lote_bangente .   
 
