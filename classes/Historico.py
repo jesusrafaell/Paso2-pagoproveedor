@@ -41,10 +41,9 @@ class Historico:
     def __str__(self):
         return f"Historico(id={self.hisId} aboCodAfi={self.aboCodAfi}, aboCodComercio={self.aboCodComercio}, aboTerminal={self.aboTerminal}, aboCodBanco={self.aboCodBanco}, aboNroCuenta={self.aboNroCuenta}, aboTipoCuenta={self.aboTipoCuenta}, comerDesc={self.comerDesc}, comerTipoPer={self.comerTipoPer}, comerPagaIva={self.comerPagaIva}, comerCodUsuario={self.comerCodUsuario}, comerCodPadre={self.comerCodPadre}, comerRif={self.comerRif}, contNombres={self.contNombres}, contApellidos={self.contApellidos}, contTelefLoc={self.contTelefLoc}, contTelefMov={self.contTelefMov}, contMail={self.contMail}, afiDesc={self.afiDesc}, afiCodTipoPer={self.afiCodTipoPer}, hisLote={self.hisLote}, hisRecordTDD={self.hisRecordTDD}, hisAmountTDD={self.hisAmountTDD}, hisRecordTDC={self.hisRecordTDC}, hisAmountTDC={self.hisAmountTDC}, hisAmountTDCImpuesto={self.hisAmountTDCImpuesto}, hisAmountIVA={self.hisAmountIVA}, hisAmountComisionBanco={self.hisAmountComisionBanco}, hisAmountTotal={self.hisAmountTotal}, hisFecha={self.hisFecha}, hisFechaProceso={self.hisFechaProceso}, hisFechaEjecucion={self.hisFechaEjecucion})"
         
-    def getHistoricoPagoList(fecha: str, cnxn):
-        SPsql = "EXEC SP_consultaHistoricoPago_BGENTE ?, ?"
-        params = (fecha, '1')
-        cursor = cnxn.cursor().execute(SPsql, params)
+    def getHistoricoPagoList(fecha: str, cnxn, op: str):
+        SPsql = f"EXEC SP_consultaHistoricoPago_BGENTE {fecha}, {int(op)}"
+        cursor = cnxn.cursor().execute(SPsql)
 
         # Obtener los nombres de las columnas
         column_names = [column[0] for column in cursor.description]

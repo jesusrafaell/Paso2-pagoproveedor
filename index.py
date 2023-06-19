@@ -17,7 +17,10 @@ strDate = ahora.strftime("%y%m%d")
 
 strDateX =  strDate
 if len(sys.argv) > 1:
-  strDateX = sys.argv[1]
+  op = sys.argv[1]
+
+if len(sys.argv) > 2:
+  strDateX = sys.argv[2]
 
 server = server_m
 database = database_m
@@ -25,7 +28,7 @@ username = username_m
 password = password_m
 afiliado = afiliado_m
 rutaArchivo = rutaArchivo_m
-print(server, database, username, password)
+print(server, database, username, password, op)
 cnxn = db.conectar(server, database, username, password)
 resultado = []
 
@@ -52,7 +55,8 @@ log = open(log_file, "a")
 if cnxn:
   print("Connected to DB")
   print("PROCESO INICIADO -----------------------------------------------")
-  result = Historico.getHistoricoPagoList(strDateX, cnxn) # Get Historico
+  result = Historico.getHistoricoPagoList(strDateX, cnxn, op)  
+  # Get Historico
 
   print(len(result))
 
