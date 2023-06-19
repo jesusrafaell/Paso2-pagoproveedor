@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copia el archivo requirements.txt al contenedor
 COPY requirements.txt .
-COPY known_hosts /root/.ssh/
+#COPY known_hosts /root/.ssh/
 # Instala las dependencias
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list
@@ -22,9 +22,9 @@ RUN mkdir /BGENTE
 RUN sed -i 's/SECLEVEL=2/SECLEVEL=1/g' /etc/ssl/openssl.cnf
 
 # Ejecuta el comando python index.py 
-# CMD ["python", "index.py"]
+CMD ["python", "index.py"]
 # Ejecuta el comando python index.py 
-CMD ["python", "indexWithDate.py"]
+#@CMD ["python", "indexWithDate.py"]
 
 # docker build -t lote_bangente .   
 

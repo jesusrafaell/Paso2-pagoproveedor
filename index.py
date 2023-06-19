@@ -1,7 +1,7 @@
 import time
 from classes.Historico import Historico
 from utils.excel import Excel
-from utils.sftp import sftp
+#from utils.sftp import sftp
 from variables import *
 from utils.writeFile import File 
 from datetime import datetime
@@ -14,8 +14,11 @@ import sys
 
 ahora = datetime.now()
 strDate = ahora.strftime("%y%m%d")
+
 strDateX =  strDate
-strDateX = "230617"  # YYMMDD
+if len(sys.argv) > 1:
+  strDateX = sys.argv[1]
+
 server = server_m
 database = database_m
 username = username_m
@@ -35,6 +38,7 @@ date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
 # Verificar si la ruta existe y crearla si no
 if not os.path.exists(rutaArchivo):
     os.makedirs(rutaArchivo)
+print(rutaArchivo)
 
 #Log
 log_file = os.path.join(rutaLog, "logApp.txt")
@@ -47,6 +51,7 @@ log = open(log_file, "a")
 
 if cnxn:
   print("Connected to DB")
+  print("PROCESO INICIADO -----------------------------------------------")
   result = Historico.getHistoricoPagoList(strDateX, cnxn) # Get Historico
 
   print(len(result))
@@ -118,6 +123,7 @@ if cnxn:
     #else:
       #print('Process error SFTP!!')
       #log.write(datetime.now() + " Error: " + "Process error SFTP!!" + "\n")
+    print("PROCESO FINALIZADO -----------------------------------------------")
   else:
     print("No existen registros")
     log.write(str(strDate + " Error: " + "No records found" + "\n"))
@@ -125,3 +131,4 @@ else:
   print("Error connecting to DB")
   log.write(datetime.now() + "Error connecting to DB" + "No records found" + "\n")
 log.close()
+

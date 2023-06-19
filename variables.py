@@ -4,7 +4,7 @@ database_m = "MilPagos"
 afiliado_m = "milpagos"
 username_m = "s_sql_prd"
 password_m = "$TrPr0D22"
-rutaArchivo_m = r"C:\archivos\Reportes_MilPagos\BGENTE"
+rutaArchivo_m = r"BGENTE"
 
 #prod
 #milpagos
