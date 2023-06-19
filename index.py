@@ -38,7 +38,7 @@ date = datetime.now().replace(year=fecha.year, month=fecha.month, day=fecha.day)
 # Verificar si la ruta existe y crearla si no
 if not os.path.exists(rutaArchivo):
     os.makedirs(rutaArchivo)
-print(rutaArchivo)
+print(os.getcwd() , rutaArchivo)
 
 #Log
 log_file = os.path.join(rutaLog, "logApp.txt")
