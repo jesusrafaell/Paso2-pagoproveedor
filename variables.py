@@ -1,5 +1,5 @@
 #qa
-server_m= "10.198.73.35"
+server_m= "10.198.72.11"
 database_m = "MilPagos"
 afiliado_m = "milpagos"
 username_m = "s_sql_prd"
