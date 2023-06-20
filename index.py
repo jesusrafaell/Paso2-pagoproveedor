@@ -1,4 +1,3 @@
-import time
 from classes.Historico import Historico
 from utils.excel import Excel
 #from utils.sftp import sftp
