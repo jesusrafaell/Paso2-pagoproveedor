@@ -111,9 +111,7 @@ BEGIN
       INNER JOIN Afiliados af ON h.aboCodAfi = af.afiCod 
       LEFT JOIN cta_bank_pot ct ON ct.id = a.ref_bank
 		WHERE 
-      convert(date ,h.hisFechaEjecucion) = @fecha 
-      and hisAmountTotal > 0
-      and a.ref_bank = 1
+      hisAmountTotal > 0 and a.ref_bank = 1
 		ORDER BY h.aboCodComercio
 		
 END
